@@ -8,6 +8,13 @@ func (s *DuktapeSuite) TestPevalString(c *C) {
 	c.Assert(s.ctx.GetString(-1), Equals, "Golang love Duktape!")
 }
 
+func (s *DuktapeSuite) TestPevalString_NonBMP(c *C) {
+	s.ctx.EvalString(`"😱"`)
+	c.Assert(s.ctx.IsString(-1), Equals, true)
+	actual := s.ctx.GetString(-1)
+	c.Assert(actual, Equals, "😱")
+}
+
 func (s *DuktapeSuite) TestPevalString_Error(c *C) {
 	err := s.ctx.PevalString("var = 'foo';")
 	c.Assert(err.(*Error).Type, Equals, "SyntaxError")

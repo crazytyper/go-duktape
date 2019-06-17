@@ -189,7 +189,7 @@ func (d *Context) Base64Decode(index int) {
 // See: http://duktape.org/api.html#duk_base64_encode
 func (d *Context) Base64Encode(index int) string {
 	if s := C.duk_base64_encode(d.duk_context, C.duk_idx_t(index)); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -497,7 +497,7 @@ func (d *Context) GetLength(index int) int {
 // See: http://duktape.org/api.html#duk_get_lstring
 func (d *Context) GetLstring(index int) string {
 	if s := C.duk_get_lstring(d.duk_context, C.duk_idx_t(index), nil); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -543,7 +543,7 @@ func (d *Context) GetPrototype(index int) {
 // See: http://duktape.org/api.html#duk_get_string
 func (d *Context) GetString(i int) string {
 	if s := C.duk_get_string(d.duk_context, C.duk_idx_t(i)); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -599,7 +599,7 @@ func (d *Context) HexDecode(index int) {
 // See: http://duktape.org/api.html#duk_hex_encode
 func (d *Context) HexEncode(index int) string {
 	if s := C.duk_hex_encode(d.duk_context, C.duk_idx_t(index)); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -747,7 +747,7 @@ func (d *Context) JsonDecode(index int) {
 // See: http://duktape.org/api.html#duk_json_encode
 func (d *Context) JsonEncode(index int) string {
 	if s := C.duk_json_encode(d.duk_context, C.duk_idx_t(index)); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -1043,7 +1043,7 @@ func (d *Context) PushLstring(str string, lenght int) string {
 	__str__ := C.CString(str)
 	var result string
 	if s := C.duk_push_lstring(d.duk_context, __str__, C.duk_size_t(lenght)); s != nil {
-		result = C.GoString(s)
+		result = goString(s)
 	}
 	C.free(unsafe.Pointer(__str__))
 	return result
@@ -1074,7 +1074,7 @@ func (d *Context) PushString(str string) string {
 	__str__ := C.CString(str)
 	var result string
 	if s := C.duk_push_string(d.duk_context, __str__); s != nil {
-		result = C.GoString(s)
+		result = goString(s)
 	}
 	C.free(unsafe.Pointer(__str__))
 	return result
@@ -1085,7 +1085,7 @@ func (d *Context) PushStringFile(path string) string {
 	__path__ := C.CString(path)
 	var result string
 	if s := C._duk_push_string_file(d.duk_context, __path__); s != nil {
-		result = C.GoString(s)
+		result = goString(s)
 	}
 	C.free(unsafe.Pointer(__path__))
 	return result
@@ -1203,7 +1203,7 @@ func (d *Context) RequireInt(index int) int {
 // See: http://duktape.org/api.html#duk_require_lstring
 func (d *Context) RequireLstring(index int) string {
 	if s := C.duk_require_lstring(d.duk_context, C.duk_idx_t(index), nil); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -1246,7 +1246,7 @@ func (d *Context) RequireStackTop(top int) {
 // See: http://duktape.org/api.html#duk_require_string
 func (d *Context) RequireString(index int) string {
 	if s := C.duk_require_string(d.duk_context, C.duk_idx_t(index)); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -1295,7 +1295,7 @@ func (d *Context) SafeCall(fn, args *[0]byte, nargs, nrets int) int {
 // See: http://duktape.org/api.html#duk_safe_to_lstring
 func (d *Context) SafeToLstring(index int) string {
 	if s := C.duk_safe_to_lstring(d.duk_context, C.duk_idx_t(index), nil); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -1303,7 +1303,7 @@ func (d *Context) SafeToLstring(index int) string {
 // See: http://duktape.org/api.html#duk_safe_to_string
 func (d *Context) SafeToString(index int) string {
 	if s := C._duk_safe_to_string(d.duk_context, C.duk_idx_t(index)); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -1398,7 +1398,7 @@ func (d *Context) ToInt32(index int) int32 {
 // See: http://duktape.org/api.html#duk_to_lstring
 func (d *Context) ToLstring(index int) string {
 	if s := C.duk_to_lstring(d.duk_context, C.duk_idx_t(index), nil); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }
@@ -1431,7 +1431,7 @@ func (d *Context) ToPrimitive(index int, hint int) {
 // See: http://duktape.org/api.html#duk_to_string
 func (d *Context) ToString(index int) string {
 	if s := C.duk_to_string(d.duk_context, C.duk_idx_t(index)); s != nil {
-		return C.GoString(s)
+		return goString(s)
 	}
 	return ""
 }

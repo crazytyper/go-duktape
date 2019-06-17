@@ -1,25 +1,26 @@
 # Duktape bindings for Go(Golang)
 
-[![wercker status](https://app.wercker.com/status/3a5bb2e639a4b4efaf4c8bf7cab7442d/s "wercker status")](https://app.wercker.com/project/bykey/3a5bb2e639a4b4efaf4c8bf7cab7442d)
-[![Travis status](https://travis-ci.org/olebedev/go-duktape.svg?branch=v3)](https://travis-ci.org/olebedev/go-duktape)
-[![Appveyor status](https://ci.appveyor.com/api/projects/status/github/olebedev/go-duktape?branch=v3&svg=true)](https://ci.appveyor.com/project/olebedev/go-duktape/branch/v3)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/olebedev/go-duktape?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 [Duktape](http://duktape.org/index.html) is a thin, embeddable javascript engine.
 Most of the [api](http://duktape.org/api.html) is implemented.
-The exceptions are listed [here](https://github.com/olebedev/go-duktape/blob/master/api.go#L1566).
+The exceptions are listed [here](https://github.com/crazytyper/go-duktape/blob/master/api.go#L1566).
+
+This is a fork of https://github.com/olebedev/go-duktape.
+
+It includes duktape v2.3.
+
+It decodes [CESU-8](https://github.com/svaarala/duktape/blob/master/doc/utf8-internal-representation.rst) encoded strings returned by duktape into UTF-8 using https://github.com/crazytyper/go-cesu8.
 
 ### Usage
 
-The package is fully go-getable, no need to install any external C libraries.  
-So, just type `go get gopkg.in/olebedev/go-duktape.v3` to install.
+The package is fully go-getable, no need to install any external C libraries.
+So, just type `go get github.com/crazytyper/go-duktape` to install.
 
 
 ```go
 package main
 
 import "fmt"
-import "gopkg.in/olebedev/go-duktape.v3"
+import "github.com/crazytyper/go-duktape"
 
 func main() {
   ctx := duktape.New()
@@ -41,7 +42,7 @@ However, binding a Go function to the Javascript context is available:
 package main
 
 import "fmt"
-import "gopkg.in/olebedev/go-duktape.v3"
+import "github.com/crazytyper/go-duktape"
 
 func main() {
   ctx := duktape.New()
@@ -66,7 +67,7 @@ There is a method to inject timers to the global scope:
 package main
 
 import "fmt"
-import "gopkg.in/olebedev/go-duktape.v3"
+import "github.com/crazytyper/go-duktape"
 
 func main() {
   ctx := duktape.New()
@@ -99,7 +100,7 @@ Also you can `FlushTimers()`.
 
 ### Command line tool
 
-Install `go get gopkg.in/olebedev/go-duktape.v3/...`.  
+Install `go get github.com/crazytyper/go-duktape/...`.
 Execute file.js: `$GOPATH/bin/go-duk file.js`.
 
 ### Benchmarks
@@ -110,8 +111,6 @@ Execute file.js: `$GOPATH/bin/go-duk file.js`.
 |[agora](https://github.com/PuerkitoBio/agora/)|149.33s|
 |[GopherLua](https://github.com/yuin/gopher-lua/)|8.39s|
 |**go-duktape**|**9.80s**|
-
-More details are [here](https://github.com/olebedev/go-duktape/wiki/Benchmarks).
 
 ### Status
 
